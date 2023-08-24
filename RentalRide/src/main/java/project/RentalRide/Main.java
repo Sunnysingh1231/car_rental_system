@@ -2,7 +2,11 @@ package project.RentalRide;
 
 import java.util.Scanner;
 
+
 import project.Admin.Admin;
+import project.Dto.Customers;
+import project.Service.Service;
+import project.Service.ServiceImpl;
 
 public class Main {
 	
@@ -17,7 +21,7 @@ public class Main {
 		String password = sc.next();
 		sc.nextLine();
 		
-		if (userName.equals("admin")&&password.equals(password)) {
+		if (userName.equals("a")&&password.equals("a")) {
 			System.out.println("Login Successful");
 			
 			int input = 0;
@@ -25,17 +29,45 @@ public class Main {
 			do {
 				
 				System.out.println("Please enter your preference");
-				System.out.println("1. - ");
-				System.out.println("2. - ");
-				System.out.println("3. - ");
-				System.out.println("0. - Log Out");
+				System.out.println("1. - Total Registration Details");
+				System.out.println("2. - Add Vehical");
+//				System.out.println("3. - Update Vehical");
+//				System.out.println("4. - Delete Vehical");
+//				System.out.println("5. - View all Deleted Vehical");
+//				System.out.println("6. - Delete Customer");
+//				System.out.println("7. - View all Deleted Customers");
+//				System.out.println("0. - Log Out");
 				
 				input = sc.nextInt();
 				
 				switch (input) {
 				case 1:
-					Admin.adminPre(sc);
+					Admin.totalRegistration();
 					break;
+					
+				case 2:
+					Admin.addVehicle(sc);
+					break;
+					
+//				case 3:
+//					Admin.totalRegistration();
+//					break;
+//					
+//				case 4:
+//					Admin.totalRegistration();
+//					break;
+//					
+//				case 5:
+//					Admin.totalRegistration();
+//					break;
+//					
+//				case 6:
+//					Admin.totalRegistration();
+//					break;
+//					
+//				case 7:
+//					Admin.totalRegistration();
+//					break;
 					
 				case 0:
 					System.out.println("Log Out Successful");
@@ -51,11 +83,42 @@ public class Main {
 			
 		}
 		else {
-			System.out.println("Wrong Credential");
+			System.out.println("Wrong Customers");
 		}
 	}
 
 	
+	
+	//----------------------------customerSignup---------------------------
+	public static void customerSignup(Scanner sc) {
+		
+		System.out.println("Enter Your Name");
+		String name = sc.next();
+		sc.nextLine();
+		
+		System.out.println("Enter your Email");
+		String email = sc.next();
+		sc.nextLine();
+		
+		System.out.println("Enter Mobile Number");
+		int mobNumber = sc.nextInt();		
+		
+		
+		System.out.println("Enter Password");
+		String password = sc.next();
+		sc.nextLine();
+		
+		System.out.println("Enter Amount");
+		double amount = sc.nextDouble();
+		
+		
+		Service s = new ServiceImpl();
+		
+		Customers c = new Customers(name,email,mobNumber,password,amount);
+		
+		s.addCustomer(c);
+		
+	}
 	
 	
 	
@@ -84,7 +147,7 @@ public class Main {
 			
 
 			case 2:
-//				PasengerSignup(sc, passengers);
+				customerSignup(sc);
 				break;
 				
 			case 0:
