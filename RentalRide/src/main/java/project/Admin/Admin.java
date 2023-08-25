@@ -15,37 +15,9 @@ import project.Utility.Util;
 
 public class Admin {
 
-	public static void totalRegistration() {
-	    EntityManager em = null;
-	    List<Customers> c = null;
-
-	    try {
-	        em = Util.getConnection();
-	        EntityTransaction et = em.getTransaction();
-	        
-	        et.begin(); 
-
-	        TypedQuery<Customers> tq = em.createQuery("SELECT c FROM Customers c", Customers.class);
-	        c = tq.getResultList();
-
-	        for (Customers data : c) {
-	        	System.out.println("+--------------------------------------------------------------------------------------------------+");
-	            System.out.println("|"+data);
-	        	System.out.println("+--------------------------------------------------------------------------------------------------+");
-	        }
-
-	        et.commit();
-
-	    } catch (Exception e) {
-	        System.out.println("Something went wrong: " + e.getMessage());
-	        if (em != null && em.getTransaction().isActive()) {
-	            em.getTransaction().rollback();
-	        }
-	    } finally {
-	        if (em != null) {
-	            em.close();
-	        }
-	    }
+	public static void viewAllCust() {
+		Service s = new ServiceImpl();
+		s.viewAllCustomers();
 	}
 
 
@@ -76,5 +48,39 @@ public class Admin {
 		
 		s.addVehicle(v);
 		
+	}
+	
+	public static void deleteCustomer(Scanner sc) {
+		
+		System.out.println("Enter Customer id");
+		int id = sc.nextInt();
+		
+		
+		Service s = new ServiceImpl();
+		s.deleteCustomer(id);
+	}
+	
+	public static void viewAllVehicle() {
+		Service s = new ServiceImpl();
+		s.viewAllVeicle();
+	}
+	
+	public static void deleteVehicle(Scanner sc) {
+		
+		System.out.println("Enter Vehicle id");
+		int id = sc.nextInt();
+		
+		Service s = new ServiceImpl();
+		s.deleteVehicla(id);
+	}
+	
+	public static void viewDeleteCustomer() {
+		Service s = new ServiceImpl();
+		s.viewAllDeletedCustomers();
+	}
+	
+	public static void viewDeleteVehicle() {
+		Service s = new ServiceImpl();
+		s.viewAllDeletedVeicle();
 	}
 }

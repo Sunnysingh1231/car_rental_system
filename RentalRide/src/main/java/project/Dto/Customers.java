@@ -32,12 +32,17 @@ public class Customers {
 	@Column(name = "Money", length = 8)
 	private double money;
 	
+	@Column(name = "isDelete", columnDefinition = "boolean default false")
+    private boolean isDelete;
+	
 	
 
 	public Customers() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	public Customers(String name, String email, int mobileNumber, String password, double money) {
 		super();
@@ -47,6 +52,8 @@ public class Customers {
 		this.password = password;
 		this.money = money;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -94,6 +101,16 @@ public class Customers {
 
 	public void setMoney(double money) {
 		this.money = money;
+	}
+	
+	
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	@Override
