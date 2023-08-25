@@ -6,6 +6,13 @@ import project.Dto.Customers;
 import project.Dto.Vehicle;
 
 public class ServiceImpl implements Service {
+	
+	@Override
+	public void viewAllCustomers() {
+		Dao dao = new DaoImpl();
+		dao.viewAllCustomers();
+		
+	}
 
 	@Override
 	public void addCustomer(Customers c) {
@@ -42,4 +49,24 @@ public class ServiceImpl implements Service {
 		
 	}
 
+	@Override
+	public void viewAllVeicle() {
+		Dao dao = new DaoImpl();
+		dao.viewAllVeicle();
+		
+	}
+
+	@Override
+	public void viewAllDeletedCustomers() {
+		Dao dao = new DaoImpl();
+		dao.viewAllDeletedCustomers();
+		
+	}
+
+	@Override
+	public void viewAllDeletedVeicle() {
+		Dao dao = new DaoImpl();
+		dao.viewAllDeletedVeicle();
+		
+	}
 }
