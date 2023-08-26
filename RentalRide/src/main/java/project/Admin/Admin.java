@@ -35,16 +35,23 @@ public class Admin {
 		String brand = sc.next();		
 		sc.nextLine();
 		
-		System.out.println("Enter Vehicle Price/KM");
+		System.out.println("Enter Vehicle Price/Day");
 		double password = sc.nextDouble();
 		
 		System.out.println("Enter Vehicle Manufacture Date");
 		LocalDate date = LocalDate.parse(sc.next());
 		sc.nextLine();
 		
+		System.out.println("Enter Vehicle Seating Capacity");
+		int capacity = sc.nextInt();
+		
+		System.out.println("Enter Vehicle Mileage in KM");
+		int mileage = sc.nextInt();
+		
+		
 		Service s = new ServiceImpl();
 		
-		Vehicle v = new Vehicle(name,type,brand,password,date);
+		Vehicle v = new Vehicle(name,type,brand,password,date,capacity,mileage);
 		
 		s.addVehicle(v);
 		
@@ -83,4 +90,16 @@ public class Admin {
 		Service s = new ServiceImpl();
 		s.viewAllDeletedVeicle();
 	}
+	
+	public static void allBookedVehicle() {
+		Service s = new ServiceImpl();
+		s.viewAllBookedVehicle();
+	}
+	
+//	public static void main(String[] args) {
+//		Scanner sc = new Scanner(System.in);
+//		
+//		Admin sAdmin = new Admin();
+//		sAdmin.allBookedVehicle();
+//	}
 }
