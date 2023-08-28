@@ -4,14 +4,13 @@ import java.util.Scanner;
 
 import project.Admin.Admin;
 import project.Admin.Customer;
-import project.Dao.DaoImpl;
 import project.Dto.Customers;
 import project.Service.Service;
 import project.Service.ServiceImpl;
 
 public class Main {
 
-	// ----------------------------adminLogin---------------------------
+	// ----------------------------adminLogin------------------------------*-
 	public static void adminLogin(Scanner sc) {
 		System.out.println("Enter Username");
 		String userName = sc.next();
@@ -22,7 +21,9 @@ public class Main {
 		sc.nextLine();
 
 		if (userName.equals("a") && password.equals("a")) {
-			System.out.println("Login Successful");
+			System.out.println("+------------------+");
+			System.out.println("| Login Successful |");
+			System.out.println("+------------------+");
 
 			int input = 0;
 
@@ -34,7 +35,7 @@ public class Main {
 				System.out.println("3. - Add Vehical");
 //				System.out.println("4. - Update Vehical");
 				System.out.println("5. - Delete Vehical");
-//				System.out.println("6. - View all Deleted Vehical");
+				System.out.println("6. - View all Booked Vehical");
 				System.out.println("7. - Delete Customer");
 				System.out.println("8. - View all Deleted Customers");
 				System.out.println("9. - View all Deleted Vehivle");
@@ -63,10 +64,10 @@ public class Main {
 					Admin.deleteVehicle(sc);
 					break;
 
-//				case 6:
-//					Admin.totalRegistration();
-//					break;
-//					
+				case 6:
+					Admin.allBookedVehicle();
+					break;
+					
 				case 7:
 					Admin.deleteCustomer(sc);
 					break;
@@ -80,7 +81,9 @@ public class Main {
 					break;
 
 				case 0:
-					System.out.println("Admin Log Out Successful");
+					System.out.println("+--------------------------+");
+					System.out.println("| Admin Log Out Successful |");
+					System.out.println("+--------------------------+");
 					break;
 
 				default:
@@ -95,7 +98,7 @@ public class Main {
 		}
 	}
 
-	// ----------------------------customerSignup---------------------------
+	// ----------------------------customerSignup--------------------------*-
 	public static void customerSignup(Scanner sc) {
 
 		System.out.println("Enter Your Name");
@@ -124,7 +127,7 @@ public class Main {
 
 	}
 	
-	// ----------------------------customerLogin---------------------------
+	// ----------------------------customerLogin---------------------------*-
 	
 	public static void customerLogin(Scanner sc) {
 
@@ -171,7 +174,9 @@ public class Main {
 				break;
 
 			case 0:
-				System.out.println("Thank You Please visit again");
+				System.out.println("+------------------------------+");
+				System.out.println("| Thank You Please visit again |");
+				System.out.println("+------------------------------+");
 				break;
 
 			default:

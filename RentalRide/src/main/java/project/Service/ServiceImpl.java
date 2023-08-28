@@ -69,4 +69,30 @@ public class ServiceImpl implements Service {
 		dao.viewAllDeletedVeicle();
 		
 	}
+
+	@Override
+	public void viewAllBookedVehicle() {
+		Dao dao = new DaoImpl();
+		dao.viewAllBookedVehicle();
+		
+	}
+
+	@Override
+	public void vehicleAvailability() {
+		Dao dao = new DaoImpl();
+		dao.vehicleAvailability();
+		
+	}
+
+	@Override
+	public void addMoney(int id,double m) {
+		Dao dao = new DaoImpl();
+		dao.addMoney(id, m);
+	}
+
+	@Override
+	public void withdraw(int id,double m) {
+		Dao dao = new DaoImpl();
+		dao.withdraw(id, m);
+	}
 }

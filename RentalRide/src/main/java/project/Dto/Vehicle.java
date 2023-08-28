@@ -28,28 +28,55 @@ public class Vehicle {
 
 	@Column(name = "PPKM", length = 8)
 	private double price;
-	
+
 	@Column(name = "Manufacture Date")
-    private LocalDate manufactureDate;
-	
+	private LocalDate manufactureDate;
+
 	@Column(name = "isDelete", columnDefinition = "boolean default false")
-    private boolean isDelete;
-
+	private boolean isDelete;
 	
+	@Column(name = "isBooked", columnDefinition = "boolean default false")
+	private boolean isBooked;
 
-	public Vehicle(String name, String type, String brand, double price, LocalDate manufactureDate) {
+	@Column(name = "Seating Capacity")
+	private int seatingCapacity;
+
+	@Column(name = "Mileage")
+	private int mileage;
+
+	public Vehicle(String name, String type, String brand, double price, LocalDate manufactureDate, int seatingCapacity,
+			int mileage) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.brand = brand;
 		this.price = price;
 		this.manufactureDate = manufactureDate;
+		this.seatingCapacity = seatingCapacity;
+		this.mileage = mileage;
 	}
 
 	@Override
 	public String toString() {
-		return "Vehicla [id=" + id + ", name=" + name + ", type=" + type + ", brand=" + brand + ", price=" + price
-				+ ", manufactureDate=" + manufactureDate + "]";
+		return "Vehicle [id=" + id + ", name=" + name + ", type=" + type + ", brand=" + brand + ", price per Day=" + price
+				+ ", manufactureDate=" + manufactureDate + ", seatingCapacity=" + seatingCapacity + ", mileage in KM="
+				+ mileage + "]";
+	}
+
+	public int getSeatingCapacity() {
+		return seatingCapacity;
+	}
+
+	public void setSeatingCapacity(int seatingCapacity) {
+		this.seatingCapacity = seatingCapacity;
+	}
+
+	public int getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
 	}
 
 	public int getId() {
@@ -99,8 +126,6 @@ public class Vehicle {
 	public void setManufactureDate(LocalDate manufactureDate) {
 		this.manufactureDate = manufactureDate;
 	}
-	
-	
 
 	public boolean isDelete() {
 		return isDelete;
@@ -109,11 +134,20 @@ public class Vehicle {
 	public void setDelete(boolean isDelete) {
 		this.isDelete = isDelete;
 	}
+	
+	
+
+	public boolean isBooked() {
+		return isBooked;
+	}
+
+	public void setBooked(boolean isBooked) {
+		this.isBooked = isBooked;
+	}
 
 	public Vehicle() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
 }

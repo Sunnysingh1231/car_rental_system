@@ -16,5 +16,9 @@ public interface Service {
 	public void viewAllDeletedCustomers();
 	public void viewAllDeletedVeicle();
 	
+	public void viewAllBookedVehicle();
+	public void vehicleAvailability();
 	
+	public void addMoney(int id,double m);
+	public void withdraw(int id,double m);
 }

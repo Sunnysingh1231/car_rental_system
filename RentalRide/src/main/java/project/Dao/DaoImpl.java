@@ -1,5 +1,6 @@
 package project.Dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
@@ -29,8 +30,7 @@ public class DaoImpl implements Dao {
 			c = tq.getResultList();
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
-
+					"+--------------------------------------------------------------------------------------------------------+");
 			if(c.isEmpty()) {
 				System.out.println("empty");
 			}
@@ -45,8 +45,7 @@ public class DaoImpl implements Dao {
 			}
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
-
+					"+--------------------------------------------------------------------------------------------------------+");
 			et.commit();
 
 		} catch (Exception e) {
@@ -216,8 +215,7 @@ public class DaoImpl implements Dao {
 			v = tq.getResultList();
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
-
+					"+--------------------------------------------------------------------------------------------------------+");
 			for (Vehicle data : v) {
 
 				if (data.isDelete() == false) {
@@ -227,8 +225,7 @@ public class DaoImpl implements Dao {
 			}
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
-
+					"+--------------------------------------------------------------------------------------------------------+");
 			et.commit();
 
 		} catch (Exception e) {
@@ -262,7 +259,7 @@ public class DaoImpl implements Dao {
 			c = tq.getResultList();
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
+					"+--------------------------------------------------------------------------------------------------------+");
 
 			for (Customers data : c) {
 
@@ -273,7 +270,7 @@ public class DaoImpl implements Dao {
 			}
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
+					"+--------------------------------------------------------------------------------------------------------+");
 
 			et.commit();
 
@@ -308,8 +305,7 @@ public class DaoImpl implements Dao {
 			c = tq.getResultList();
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
-
+					"+--------------------------------------------------------------------------------------------------------+");
 			for (Vehicle data : c) {
 
 				if (data.isDelete() == true) {
@@ -319,8 +315,7 @@ public class DaoImpl implements Dao {
 			}
 
 			System.out.println(
-					"+----------------------------------------------------------------------------------------------+");
-
+					"+--------------------------------------------------------------------------------------------------------+");
 			et.commit();
 
 		} catch (Exception e) {
@@ -337,9 +332,188 @@ public class DaoImpl implements Dao {
 	}
 
 	
+	// -----------------------viewAllBookedVehicle--------------------*-
+	@Override
+	public void viewAllBookedVehicle() {
+		
+		EntityManager em = null;
+		List<Vehicle> c = null;
+		List<Vehicle> vehicles = new ArrayList<>();
+
+		try {
+			em = Util.getConnection();
+			EntityTransaction et = em.getTransaction();
+
+			et.begin();
+
+			TypedQuery<Vehicle> tq = em.createQuery("SELECT c FROM Vehicle c", Vehicle.class);
+			c = tq.getResultList();
+
+			System.out.println(
+					"+--------------------------------------------------------------------------------------------------------+");			
+			for (Vehicle data : c) {
+
+				if (data.isDelete() == false && data.isBooked() == true) {
+					
+					vehicles.add(data);
+					
+				}
+			}
+			
+			if(vehicles.isEmpty()) {
+				System.out.println("+--------------------------+");
+				System.out.println("| No vehicle are book Now. |");
+				System.out.println("+--------------------------+");
+			}else {
+				for(Vehicle v : vehicles) {
+					System.out.println("|" + v);
+				}
+			}
+
+			System.out.println(
+					"+--------------------------------------------------------------------------------------------------------+");
+			et.commit();
+
+		} catch (Exception e) {
+			System.out.println("Something went wrong: " + e.getMessage());
+			if (em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		
+	}
+
+	// -----------------------vehicleAvailability--------------------*-
+	public void vehicleAvailability() {
+		
+		EntityManager em = null;
+		List<Vehicle> c = null;
+		List<Vehicle> vehicles = new ArrayList<>();
+
+		try {
+			em = Util.getConnection();
+			EntityTransaction et = em.getTransaction();
+
+			et.begin();
+
+			TypedQuery<Vehicle> tq = em.createQuery("SELECT c FROM Vehicle c", Vehicle.class);
+			c = tq.getResultList();
+
+			System.out.println(
+					"+--------------------------------------------------------------------------------------------------------+");			
+			for (Vehicle data : c) {
+
+				if (data.isDelete() == false && data.isBooked() == false) {
+					
+					vehicles.add(data);
+					
+				}
+			}
+			
+			if(vehicles.isEmpty()) {
+				System.out.println("No vehicle are book Now.");
+			}else {
+				for(Vehicle v : vehicles) {
+					System.out.println("|" + v);
+				}
+			}
+
+			System.out.println(
+					"+--------------------------------------------------------------------------------------------------------+");
+			et.commit();
+
+		} catch (Exception e) {
+			System.out.println("Something went wrong: " + e.getMessage());
+			if (em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+	}
+
 	
-	// -----------------------viewAllDeletedVeicle---------------------
-	
+	@Override
+	public void addMoney(int id, double m) {
+		
+		EntityManager em = null;
+		Customers c = null;
+
+		try {
+			em = Util.getConnection();
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			
+			c = em.find(Customers.class, id);
+			System.out.println("+------------------------------------------------+");
+			System.out.println("| Privious Wallet Money- ₹" + c.getMoney());
+			System.out.println("+------------------------------------------------+");
+			
+			double k = c.getMoney()+m;
+			
+			c.setMoney(k);
+			et.commit();
+			System.out.println("+------------------------------------------------+");
+			System.out.println("| Updeted Wallet Money- ₹" + c.getMoney());
+			System.out.println("+------------------------------------------------+");
+
+		} catch (Exception e) {
+			System.out.println("Something went wrong: " + e.getMessage());
+			if (em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		
+	}
+
+	@Override
+	public void withdraw(int id,double m) {
+		EntityManager em = null;
+		Customers c = null;
+
+		try {
+			em = Util.getConnection();
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			
+			c = em.find(Customers.class, id);
+			
+			if(m>c.getMoney()) {
+				System.out.println("+----------------------+");
+				System.out.println("| Insufficient Balance |");
+				System.out.println("+----------------------+");
+				et.rollback();
+				return;
+			}
+			
+			double k = c.getMoney()-m;
+			
+			c.setMoney(k);
+			et.commit();
+			System.out.println("Updeted Wallet Money- ₹" + c.getMoney());
+
+		} catch (Exception e) {
+			System.out.println("Something went wrong: " + e.getMessage());
+			if (em != null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		
+	}
 
 
 }
